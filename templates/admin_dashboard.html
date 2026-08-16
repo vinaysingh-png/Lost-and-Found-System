@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+
+    <h1>Admin Dashboard</h1>
+    <p>Manage all reported items below.</p>
+
+    {% if items %}
+        <table class="admin-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Type</th>
+                    <th>Title</th>
+                    <th>Category</th>
+                    <th>Status</th>
+                    <th>Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr>
+                        <td>{{ item['id'] }}</td>
+                        <td><span class="badge badge-{{ item['item_type'] }}">{{ item['item_type']|upper }}</span></td>
+                        <td>{{ item['title'] }}</td>
+                        <td>{{ item['category'] }}</td>
+                        <td>{{ item['status'] }}</td>
+                        <td>{{ item['date_reported'] }}</td>
+                        <td>
+                            <a href="{{ url_for('item_detail', item_id=item['id']) }}">View</a>
+                            &nbsp;|&nbsp;
+                            <form method="POST" action="{{ url_for('admin_delete_item', item_id=item['id']) }}" style="display:inline;"
+                                  onsubmit="return confirm('Delete this item?');">
+                                <button type="submit" class="link-button">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No items reported yet.</p>
+    {% endif %}
+
+{% endblock %}

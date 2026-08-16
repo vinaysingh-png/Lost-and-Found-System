@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block title %}Browse Items{% endblock %}
+
+{% block content %}
+
+    <h1>Browse Lost &amp; Found Items</h1>
+
+    <!-- Search / filter form -->
+    <form method="GET" class="search-box">
+        <input type="text" name="keyword" placeholder="Search by name or description..." value="{{ keyword }}">
+
+        <select name="item_type">
+            <option value="">All Types</option>
+            <option value="lost" {% if selected_type == "lost" %}selected{% endif %}>Lost</option>
+            <option value="found" {% if selected_type == "found" %}selected{% endif %}>Found</option>
+        </select>
+
+        <select name="category">
+            <option value="">All Categories</option>
+            {% for c in categories %}
+                <option value="{{ c['category'] }}" {% if selected_category == c['category'] %}selected{% endif %}>
+                    {{ c['category'] }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <select name="status">
+            <option value="">All Status</option>
+            <option value="unresolved" {% if selected_status == "unresolved" %}selected{% endif %}>Unresolved</option>
+            <option value="claimed" {% if selected_status == "claimed" %}selected{% endif %}>Claimed</option>
+        </select>
+
+        <button type="submit" class="btn btn-primary">Search</button>
+        <a href="{{ url_for('view_items') }}" class="btn btn-secondary">Reset</a>
+    </form>
+
+    <!-- Results -->
+    {% if items %}
+        <p>{{ items|length }} item(s) found.</p>
+        <div class="item-grid">
+            {% for item in items %}
+                <a href="{{ url_for('item_detail', item_id=item['id']) }}" class="item-card">
+                    {% if item['image_filename'] %}
+                        <img src="{{ url_for('static', filename='uploads/' + item['image_filename']) }}" alt="{{ item['title'] }}">
+                    {% else %}
+                        <div class="no-image">No Photo</div>
+                    {% endif %}
+                    <div class="item-card-body">
+                        <span class="badge badge-{{ item['item_type'] }}">{{ item['item_type']|upper }}</span>
+                        {% if item['status'] == 'claimed' %}
+                            <span class="badge badge-claimed">CLAIMED</span>
+                        {% endif %}
+                        <h3>{{ item['title'] }}</h3>
+                        <p>{{ item['category'] }}</p>
+                        <p class="muted">{{ item['location'] }} &middot; {{ item['date_reported'] }}</p>
+                    </div>
+                </a>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No items match your search.</p>
+    {% endif %}
+
+{% endblock %}

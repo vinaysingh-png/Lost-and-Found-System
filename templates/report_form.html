@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}Report {{ item_type|capitalize }} Item{% endblock %}
+
+{% block content %}
+
+    <h1>Report a {{ item_type|capitalize }} Item</h1>
+
+    <form method="POST" enctype="multipart/form-data" class="form-box">
+
+        <label for="title">Item Name</label>
+        <input type="text" id="title" name="title" placeholder="e.g. Blue Water Bottle" required>
+
+        <label for="category">Category</label>
+        <select id="category" name="category" required>
+            <option value="">-- Select a category --</option>
+            <option value="Electronics">Electronics</option>
+            <option value="ID Card">ID Card</option>
+            <option value="Bag">Bag</option>
+            <option value="Bottle">Bottle</option>
+            <option value="Books/Notes">Books / Notes</option>
+            <option value="Clothing">Clothing</option>
+            <option value="Accessories">Accessories</option>
+            <option value="Other">Other</option>
+        </select>
+
+        <label for="description">Description</label>
+        <textarea id="description" name="description" rows="4" placeholder="Any details that will help identify the item"></textarea>
+
+        <label for="location">Location {{ "Lost" if item_type == "lost" else "Found" }}</label>
+        <input type="text" id="location" name="location" placeholder="e.g. Library, 2nd Floor" required>
+
+        <label for="reporter_name">Your Name</label>
+        <input type="text" id="reporter_name" name="reporter_name" required>
+
+        <label for="reporter_contact">Your Contact (Phone or Email)</label>
+        <input type="text" id="reporter_contact" name="reporter_contact" required>
+
+        <label for="image">Photo (optional)</label>
+        <input type="file" id="image" name="image" accept="image/*">
+
+        <button type="submit" class="btn btn-primary">Submit Report</button>
+    </form>
+
+{% endblock %}

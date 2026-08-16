@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block title %}{{ item['title'] }}{% endblock %}
+
+{% block content %}
+
+    <a href="{{ url_for('view_items') }}">&larr; Back to all items</a>
+
+    <div class="detail-box">
+        {% if item['image_filename'] %}
+            <img src="{{ url_for('static', filename='uploads/' + item['image_filename']) }}" alt="{{ item['title'] }}" class="detail-image">
+        {% else %}
+            <div class="no-image detail-image">No Photo Provided</div>
+        {% endif %}
+
+        <div class="detail-info">
+            <span class="badge badge-{{ item['item_type'] }}">{{ item['item_type']|upper }}</span>
+            {% if item['status'] == 'claimed' %}
+                <span class="badge badge-claimed">CLAIMED</span>
+            {% endif %}
+
+            <h1>{{ item['title'] }}</h1>
+            <p><strong>Category:</strong> {{ item['category'] }}</p>
+            <p><strong>Description:</strong> {{ item['description'] or "No description provided." }}</p>
+            <p><strong>Location:</strong> {{ item['location'] }}</p>
+            <p><strong>Date Reported:</strong> {{ item['date_reported'] }}</p>
+            <hr>
+            <p><strong>Reported By:</strong> {{ item['reporter_name'] }}</p>
+            <p><strong>Contact:</strong> {{ item['reporter_contact'] }}</p>
+
+            {% if item['status'] != 'claimed' %}
+                <form method="POST" action="{{ url_for('mark_claimed', item_id=item['id']) }}">
+                    <button type="submit" class="btn btn-primary">Mark as Claimed</button>
+                </form>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}

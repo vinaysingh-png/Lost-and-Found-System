@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Home - Lost and Found System{% endblock %}
+
+{% block content %}
+
+    <section class="hero">
+        <h1>Lost something? Found something?</h1>
+        <p>Report it here and help reunite items with their owners.</p>
+
+        <div class="hero-buttons">
+            <a href="{{ url_for('report_item', item_type='lost') }}" class="btn btn-primary">Report a Lost Item</a>
+            <a href="{{ url_for('report_item', item_type='found') }}" class="btn btn-secondary">Report a Found Item</a>
+        </div>
+    </section>
+
+    <section>
+        <h2>Recently Reported Items</h2>
+
+        {% if items %}
+            <div class="item-grid">
+                {% for item in items %}
+                    <a href="{{ url_for('item_detail', item_id=item['id']) }}" class="item-card">
+                        {% if item['image_filename'] %}
+                            <img src="{{ url_for('static', filename='uploads/' + item['image_filename']) }}" alt="{{ item['title'] }}">
+                        {% else %}
+                            <div class="no-image">No Photo</div>
+                        {% endif %}
+                        <div class="item-card-body">
+                            <span class="badge badge-{{ item['item_type'] }}">{{ item['item_type']|upper }}</span>
+                            <h3>{{ item['title'] }}</h3>
+                            <p>{{ item['category'] }}</p>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No items have been reported yet.</p>
+        {% endif %}
+
+        <p><a href="{{ url_for('view_items') }}">View all items &rarr;</a></p>
+    </section>
+
+{% endblock %}
