@@ -40,34 +40,6 @@ lost_found_flask_project/
     └── uploads/              -> uploaded item photos are saved here
 ```
 
-## How to Run This Project
-
-1. Make sure Python 3 is installed on your computer.
-
-2. Open a terminal inside this project folder.
-
-3. (Recommended) Create a virtual environment:
-   ```
-   python -m venv venv
-   venv\Scripts\activate      (Windows)
-   source venv/bin/activate   (Mac/Linux)
-   ```
-
-4. Install the required packages:
-   ```
-   pip install -r requirements.txt
-   ```
-
-5. Run the app:
-   ```
-   python app.py
-   ```
-
-6. Open your browser and go to:
-   ```
-   http://127.0.0.1:5000
-   ```
-
 The database file (`lostfound.db`) and its tables are created automatically
 the first time you run the app — you don't need to set anything up manually.
 
