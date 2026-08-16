@@ -15,7 +15,7 @@ report found items, and search through all reported items.
 - Python 3
 - Flask (web framework)
 - SQLite (database)
-- HTML, CSS (no JavaScript frameworks — kept simple on purpose)
+- HTML, CSS
 
 ## Project Structure
 ```
@@ -40,16 +40,8 @@ lost_found_flask_project/
     └── uploads/              -> uploaded item photos are saved here
 ```
 
-The database file (`lostfound.db`) and its tables are created automatically
-the first time you run the app — you don't need to set anything up manually.
-
 ## Admin Login
 - URL: `/admin/login`
 - Username: `admin`
 - Password: `admin123`
 
-## Notes
-- Uploaded photos are stored in `static/uploads/`.
-- This project intentionally keeps the code simple and readable
-  (plain SQL queries, no ORM, no JS framework) since it is a BCA
-  minor project meant to be explained during evaluation.
