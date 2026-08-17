@@ -1,4 +1,4 @@
-/* ---------- Basic reset & fonts ---------- */
+
 * {
     margin: 0;
     padding: 0;
@@ -18,7 +18,7 @@ body {
     padding: 30px 20px;
 }
 
-/* ---------- Navbar ---------- */
+
 .navbar {
     display: flex;
     justify-content: space-between;
@@ -46,7 +46,7 @@ body {
     color: #ffffff;
 }
 
-/* ---------- Flash messages ---------- */
+
 .flash-container {
     max-width: 1100px;
     margin: 15px auto 0 auto;
@@ -72,7 +72,7 @@ body {
     border: 1px solid #f0bcbc;
 }
 
-/* ---------- Hero section ---------- */
+
 .hero {
     text-align: center;
     background-color: #ffffff;
@@ -99,7 +99,7 @@ body {
     flex-wrap: wrap;
 }
 
-/* ---------- Buttons ---------- */
+
 .btn {
     display: inline-block;
     padding: 12px 24px;
@@ -129,7 +129,7 @@ body {
     background-color: #cdd8e3;
 }
 
-/* ---------- Item grid & cards ---------- */
+
 .item-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
@@ -188,7 +188,7 @@ body {
     font-size: 12px;
 }
 
-/* ---------- Badges ---------- */
+
 .badge {
     display: inline-block;
     font-size: 11px;
@@ -213,7 +213,7 @@ body {
     color: #1f3b5c;
 }
 
-/* ---------- Forms ---------- */
+
 .form-box, .search-box {
     background-color: #ffffff;
     padding: 25px;
@@ -257,7 +257,7 @@ body {
     margin-top: 15px;
 }
 
-/* ---------- Item detail page ---------- */
+
 .detail-box {
     background-color: #ffffff;
     border-radius: 10px;
@@ -292,7 +292,7 @@ body {
     margin: 15px 0;
 }
 
-/* ---------- Admin table ---------- */
+
 .admin-table {
     width: 100%;
     border-collapse: collapse;
@@ -324,7 +324,7 @@ body {
     padding: 0;
 }
 
-/* ---------- Footer ---------- */
+
 .footer {
     text-align: center;
     padding: 20px;
