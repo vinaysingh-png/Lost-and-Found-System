@@ -15,6 +15,7 @@ os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif", "webp"}
 
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
+app.config["MAX_CONTENT_LENGTH"] = 5 * 1024 * 1024   # max upload size: 5 MB
 
 
 def allowed_file(filename):
@@ -64,9 +65,10 @@ def report_item(item_type):
         image_filename = None
         file = request.files.get("image")
         if file and file.filename != "" and allowed_file(file.filename):
-            image_filename = secure_filename(file.filename)
-            
-            image_filename = f"{item_type}_{title}_{image_filename}".replace(" ", "_")
+            # clean the whole name (item type + title + original name) so
+            # characters like "/" in the title cannot break the file path
+            image_filename = secure_filename(
+                f"{item_type}_{title}_{file.filename}")
             file.save(os.path.join(app.config["UPLOAD_FOLDER"], image_filename))
 
         conn = get_connection()
